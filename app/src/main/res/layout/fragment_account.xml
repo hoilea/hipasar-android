@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="viewModel"
+      type="com.uberando.hipasar.ui.main.account.AccountViewModel" />
+  </data>
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+      style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <androidx.appcompat.widget.Toolbar
+        android:id="@+id/menu_toolbar"
+        style="@style/Widget.MaterialComponents.Toolbar.Surface"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:menu="@menu/account_menu"
+        app:title="@string/str_account" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fillViewport="true"
+      app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+          android:id="@+id/profile_content_container"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:padding="16dp"
+          android:visibility="@{viewModel.showContentContainer ? View.VISIBLE : View.GONE}">
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+              android:id="@+id/profile_image"
+              android:layout_width="56dp"
+              android:layout_height="56dp"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:set_profile_image="@{viewModel.userData.image.path}"
+              tools:src="@drawable/avatar_1" />
+            <TextView
+              android:id="@+id/profile_name"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="16dp"
+              android:layout_marginEnd="16dp"
+              android:textAppearance="@style/App.TextAppearance.Headline6.Bold"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@id/profile_image"
+              app:layout_constraintTop_toTopOf="parent"
+              app:setText_userProfileName="@{viewModel.userData.name}"
+              app:setText_userProfileName_alternative="@{viewModel.userData.email}"
+              tools:text="Alexander Fuzz" />
+            <TextView
+              android:id="@+id/profile_email"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="16dp"
+              android:layout_marginEnd="16dp"
+              android:text="@{viewModel.userData.email ?? viewModel.userData.phone}"
+              android:textAppearance="@style/App.TextAppearance.Headline6"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@id/profile_image"
+              app:layout_constraintTop_toBottomOf="@id/profile_name"
+              tools:text="alexander@mail.com" />
+          </androidx.constraintlayout.widget.ConstraintLayout>
+          <View
+            android:id="@+id/profile_view_separator_0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/grey_50_main" />
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.onAccountContainerClick()}"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/profile_menu_item_space"
+            android:paddingBottom="@dimen/profile_menu_item_space"
+            app:layout_constraintTop_toBottomOf="@id/profile_view_separator_0">
+            <ImageView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:contentDescription="@string/cd_cart_image"
+              android:src="@drawable/ic_outline_account_circle_24" />
+            <Space
+              android:layout_width="16dp"
+              android:layout_height="wrap_content" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/str_account_setting"
+              android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+          </LinearLayout>
+          <View
+            android:id="@+id/profile_view_separator_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_50_main"
+            app:layout_constraintTop_toBottomOf="@id/profile_image" />
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.onAddressContainerClick()}"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/profile_menu_item_space"
+            android:paddingBottom="@dimen/profile_menu_item_space"
+            app:layout_constraintTop_toBottomOf="@id/profile_view_separator_0">
+            <ImageView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:contentDescription="@string/cd_cart_image"
+              android:src="@drawable/ic_outline_location_on_24" />
+            <Space
+              android:layout_width="16dp"
+              android:layout_height="wrap_content" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/str_address"
+              android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+          </LinearLayout>
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_50_main"
+            app:layout_constraintTop_toBottomOf="@id/profile_image" />
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.onCartContainerClick()}"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/profile_menu_item_space"
+            android:paddingBottom="@dimen/profile_menu_item_space">
+            <ImageView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:contentDescription="@string/cd_cart_image"
+              android:src="@drawable/ic_outline_shopping_cart_24" />
+            <Space
+              android:layout_width="16dp"
+              android:layout_height="wrap_content" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/str_cart"
+              android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+          </LinearLayout>
+          <View
+            android:id="@+id/profile_view_separator_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_50_main"/>
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.onPrivacyPolicyContainerClick()}"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/profile_menu_item_space"
+            android:paddingBottom="@dimen/profile_menu_item_space">
+            <ImageView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:contentDescription="@string/cd_chat_image"
+              android:src="@drawable/ic_outline_privacy_tip_24" />
+            <Space
+              android:layout_width="16dp"
+              android:layout_height="wrap_content" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/str_privacy_policy"
+              android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+          </LinearLayout>
+          <View
+            android:id="@+id/profile_view_separator_3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_50_main"/>
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> viewModel.onSignOutContainerClick()}"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/profile_menu_item_space"
+            android:paddingBottom="@dimen/profile_menu_item_space"
+            app:layout_constraintTop_toBottomOf="@id/profile_view_separator_2">
+            <ImageView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:contentDescription="@string/cd_cart_image"
+              android:src="@drawable/ic_outline_logout_24" />
+            <Space
+              android:layout_width="16dp"
+              android:layout_height="wrap_content" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/str_logout"
+              android:textAppearance="@style/App.TextAppearance.Subtitle1.Colored.Error"/>
+          </LinearLayout>
+        </LinearLayout>
+        <com.facebook.shimmer.ShimmerFrameLayout
+          android:id="@+id/profile_placeholder_container"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:visibility="@{viewModel.showLoadingIndicator ? View.VISIBLE : View.GONE}"
+          app:shimmer_auto_start="true"
+          tools:visibility="gone">
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+            <View
+              android:id="@+id/profile_shimmer_image"
+              android:layout_width="56dp"
+              android:layout_height="56dp"
+              android:background="@color/grey_100_main"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"/>
+            <View
+              android:id="@+id/profile_shimmer_name"
+              android:layout_width="0dp"
+              android:layout_height="24dp"
+              android:layout_marginStart="16dp"
+              android:layout_marginEnd="16dp"
+              android:background="@color/grey_100_main"
+              app:layout_constraintEnd_toStartOf="@id/profile_shimmer_edit_button"
+              app:layout_constraintStart_toEndOf="@id/profile_shimmer_image"
+              app:layout_constraintTop_toTopOf="parent" />
+            <View
+              android:id="@+id/profile_shimmer_email"
+              android:layout_width="0dp"
+              android:layout_height="24dp"
+              android:layout_marginTop="8dp"
+              android:layout_marginStart="16dp"
+              android:layout_marginEnd="16dp"
+              android:background="@color/grey_100_main"
+              app:layout_constraintEnd_toStartOf="@id/profile_shimmer_edit_button"
+              app:layout_constraintStart_toEndOf="@id/profile_shimmer_image"
+              app:layout_constraintTop_toBottomOf="@id/profile_shimmer_name" />
+            <View
+              android:id="@+id/profile_shimmer_edit_button"
+              android:layout_width="24dp"
+              android:layout_height="24dp"
+              android:background="@color/grey_100_main"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
+          </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/profile_not_logged_in_container"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="16dp"
+          android:visibility="@{viewModel.showNotLoggedInContainer ? View.VISIBLE : View.GONE}"
+          tools:visibility="gone">
+          <TextView
+            android:id="@+id/profile_not_logged_in_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_msg_not_logged_in"
+            android:textAlignment="center"
+            android:textAppearance="@style/App.TextAppearance.Headline6.Bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+          <Button
+            style="@style/App.Widget.Button.Filled.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> viewModel.onLoginButtonClick()}"
+            android:text="@string/str_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_not_logged_in_message" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/transaction_error_container"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:visibility="@{viewModel.showErrorContainer ? View.VISIBLE : View.GONE}"
+          tools:visibility="gone">
+          <TextView
+            android:id="@+id/transaction_failed_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_msg_get_profile_failed"
+            android:textAppearance="@style/App.TextAppearance.Headline6.Bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+          <Button
+            style="@style/App.Widget.Button.Filled.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> viewModel.onRetryButtonClick()}"
+            android:text="@string/str_retry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/transaction_failed_message" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom|center"
+          android:layout_margin="@dimen/normal_size"
+          android:gravity="center"
+          android:onClick="@{() -> viewModel.onContactUsContainerClick()}"
+          android:orientation="vertical"
+          android:visibility="@{viewModel.showLoadingIndicator ? View.GONE : View.VISIBLE}"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent">
+
+          <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onContactUsContainerClick()}"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="4dp">
+            <ImageView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_margin="@dimen/normal_size"
+              android:contentDescription="@string/str_contact_us"
+              android:src="@drawable/ic_outline_whatsapp_24" />
+          </androidx.cardview.widget.CardView>
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="8dp" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            android:text="@string/str_contact_us" />
+        </LinearLayout>
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

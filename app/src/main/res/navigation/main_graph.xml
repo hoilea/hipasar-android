@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/main_graph"
+  app:startDestination="@id/homeFragment">
+  <fragment
+    android:id="@+id/homeFragment"
+    android:name="com.uberando.hipasar.ui.main.home.HomeFragment"
+    android:label="HomeFragment" >
+    <action
+      android:id="@+id/action_homeFragment_to_cartFragment"
+      app:destination="@id/cartFragment" />
+    <action
+      android:id="@+id/action_homeFragment_to_productDetailFragment"
+      app:destination="@id/productDetailFragment" />
+    <action
+      android:id="@+id/action_homeFragment_to_promoFragment"
+      app:destination="@id/promoFragment" />
+    <action
+      android:id="@+id/action_homeFragment_to_searchQueryFragment"
+      app:destination="@id/searchQueryFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/userOrderFragment"
+    android:name="com.uberando.hipasar.ui.main.order.UserOrderFragment"
+    android:label="UserOrderFragment" >
+    <action
+      android:id="@+id/action_userOrderFragment_to_userOrderDetailFragment"
+      app:destination="@id/userOrderDetailFragment" />
+    <argument
+      android:name="filter"
+      app:argType="com.uberando.hipasar.entity.Filter" />
+  </fragment>
+  <fragment
+    android:id="@+id/accountFragment"
+    android:name="com.uberando.hipasar.ui.main.account.AccountFragment"
+    android:label="AccountFragment" >
+    <action
+      android:id="@+id/action_accountFragment_to_accountSettingFragment"
+      app:destination="@id/accountSettingFragment" />
+    <action
+      android:id="@+id/action_accountFragment_to_addressFragment"
+      app:destination="@id/addressFragment" />
+    <action
+      android:id="@+id/action_accountFragment_to_settingFragment"
+      app:destination="@id/settingFragment" />
+    <action
+      android:id="@+id/action_accountFragment_to_cartFragment"
+      app:destination="@id/cartFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/accountSettingFragment"
+    android:name="com.uberando.hipasar.ui.main.account.setting.AccountSettingFragment"
+    android:label="AccountSettingFragment" >
+    <argument
+      android:name="user"
+      app:argType="com.uberando.hipasar.entity.User" />
+    <action
+      android:id="@+id/action_accountSettingFragment_to_accountChangeNameFragment"
+      app:destination="@id/accountChangeNameFragment" />
+    <action
+      android:id="@+id/action_accountSettingFragment_to_accountChangeEmailFragment"
+      app:destination="@id/accountChangeEmailFragment"
+      app:launchSingleTop="true" />
+    <action
+      android:id="@+id/action_accountSettingFragment_to_accountSetPasswordFragment"
+      app:destination="@id/accountSetPasswordFragment" />
+    <action
+      android:id="@+id/action_accountSettingFragment_to_accountChangePasswordFragment"
+      app:destination="@id/accountChangePasswordFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/accountChangeNameFragment"
+    android:name="com.uberando.hipasar.ui.main.account.setting.change.name.AccountChangeNameFragment"
+    android:label="AccountChangeNameFragment" >
+    <argument
+      android:name="user"
+      app:argType="com.uberando.hipasar.entity.User" />
+  </fragment>
+  <fragment
+    android:id="@+id/accountChangeEmailFragment"
+    android:name="com.uberando.hipasar.ui.main.account.setting.change.email.AccountChangeEmailFragment"
+    android:label="AccountChangeEmailFragment" >
+    <argument
+      android:name="user"
+      app:argType="com.uberando.hipasar.entity.User" />
+    <action
+      android:id="@+id/action_accountChangeEmailFragment_to_accountVerifyEmailFragment"
+      app:destination="@id/accountVerifyEmailFragment"
+      app:popUpTo="@id/accountChangeEmailFragment"
+      app:popUpToInclusive="true" />
+  </fragment>
+  <fragment
+    android:id="@+id/accountVerifyEmailFragment"
+    android:name="com.uberando.hipasar.ui.main.account.setting.verify.AccountVerifyEmailFragment"
+    android:label="AccountVerifyEmailFragment">
+    <deepLink app:uri="app.hisijang.com/users/{hash}/email/verify" />
+    <argument
+      android:name="hash"
+      app:argType="string"
+      app:nullable="true" />
+    <action
+      android:id="@+id/action_accountVerifyEmailFragment_to_accountFragment"
+      app:destination="@id/accountFragment"
+      app:popUpTo="@id/accountVerifyEmailFragment"
+      app:popUpToInclusive="true" />
+  </fragment>
+  <fragment
+    android:id="@+id/accountChangePasswordFragment"
+    android:name="com.uberando.hipasar.ui.main.account.setting.change.password.AccountChangePasswordFragment"
+    android:label="AccountChangePasswordFragment" />
+  <fragment
+    android:id="@+id/accountSetPasswordFragment"
+    android:name="com.uberando.hipasar.ui.main.account.setting.change.password.AccountSetPasswordFragment"
+    android:label="AccountSetPasswordFragment" />
+  <fragment
+    android:id="@+id/cartFragment"
+    android:name="com.uberando.hipasar.ui.main.cart.CartFragment"
+    android:label="CartFragment" />
+  <fragment
+    android:id="@+id/addressFragment"
+    android:name="com.uberando.hipasar.ui.main.address.AddressFragment"
+    android:label="AddressFragment" />
+  <fragment
+    android:id="@+id/userOrderDetailFragment"
+    android:name="com.uberando.hipasar.ui.main.order.detail.UserOrderDetailFragment"
+    android:label="UserOrderDetailFragment" >
+    <argument
+      android:name="order_id"
+      app:argType="string"
+      android:defaultValue="-1" />
+  </fragment>
+  <fragment
+    android:id="@+id/productDetailFragment"
+    android:name="com.uberando.hipasar.ui.main.product.detail.ProductDetailFragment"
+    android:label="ProductDetailFragment" >
+    <argument
+      android:name="productId"
+      app:argType="integer" />
+    <action
+      android:id="@+id/action_productDetailFragment_to_cartFragment"
+      app:destination="@id/cartFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/settingFragment"
+    android:name="com.uberando.hipasar.ui.main.setting.SettingFragment"
+    android:label="SettingFragment" >
+    <action
+      android:id="@+id/action_settingFragment_to_languageSettingFragment"
+      app:destination="@id/languageSettingFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/languageSettingFragment"
+    android:name="com.uberando.hipasar.ui.main.setting.language.LanguageSettingFragment"
+    android:label="LanguageSettingFragment" />
+  <fragment
+    android:id="@+id/userOrderOptionFragment"
+    android:name="com.uberando.hipasar.ui.main.order.option.UserOrderOptionFragment"
+    android:label="UserOrderOptionFragment" >
+    <action
+      android:id="@+id/action_userOrderOptionFragment_to_userOrderFragment"
+      app:destination="@id/userOrderFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/promoFragment"
+    android:name="com.uberando.hipasar.ui.main.promo.PromoFragment"
+    android:label="PromoFragment" >
+    <action
+      android:id="@+id/action_promoFragment_to_productDetailFragment"
+      app:destination="@id/productDetailFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/searchQueryFragment"
+    android:name="com.uberando.hipasar.ui.main.search.SearchQueryFragment"
+    android:label="SearchQueryFragment" >
+    <action
+      android:id="@+id/action_searchQueryFragment_to_searchResultFragment"
+      app:destination="@id/searchResultFragment"
+      app:popUpTo="@id/searchQueryFragment"
+      app:popUpToInclusive="true" />
+  </fragment>
+  <fragment
+    android:id="@+id/searchResultFragment"
+    android:name="com.uberando.hipasar.ui.main.search.SearchResultFragment"
+    android:label="SearchResultFragment" >
+    <action
+      android:id="@+id/action_searchResultFragment_to_productDetailFragment"
+      app:destination="@id/productDetailFragment" />
+    <action
+      android:id="@+id/action_searchResultFragment_to_cartFragment"
+      app:destination="@id/cartFragment" />
+    <argument
+      android:name="query"
+      app:argType="string" />
+    <action
+      android:id="@+id/action_searchResultFragment_to_searchQueryFragment"
+      app:destination="@id/searchQueryFragment"
+      app:popUpTo="@id/searchResultFragment"
+      app:popUpToInclusive="true" />
+  </fragment>
+
+</navigation>

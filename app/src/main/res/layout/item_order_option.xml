@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <variable
+      name="listener"
+      type="com.uberando.hipasar.ui.adapter.ClickListener" />
+    <variable
+      name="filter"
+      type="com.uberando.hipasar.entity.Filter" />
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:onClick="@{() -> listener.onItemClicked(filter)}"
+    android:padding="8dp">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:setText_orderStatusNonCap="@{filter.code}"
+      android:textAppearance="@style/App.TextAppearance.Subtitle1"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="Pending" />
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
+      android:text="@{filter.getOrderCountString()}"
+      android:textAppearance="@style/App.TextAppearance.Subtitle2.Bold"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/order_option_arrow"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="1" />
+    <ImageView
+      android:id="@+id/order_option_arrow"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:contentDescription="@string/cd_arrow_forward"
+      android:src="@drawable/ic_outline_keyboard_arrow_right_24"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

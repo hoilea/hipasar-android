@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="viewModel"
+      type="com.uberando.hipasar.ui.order.address.OrderChangeSelectAddressViewModel" />
+  </data>
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+      style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <androidx.appcompat.widget.Toolbar
+        style="@style/Widget.MaterialComponents.ActionBar.Surface"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:setOnClick_navigationIcon="@{() -> viewModel.onBackButtonClick()}"
+        app:title="@{viewModel.toolbarTitle}" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addresses_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/address_create_button"
+        android:visibility="@{viewModel.addressAvailable ? View.VISIBLE : View.GONE}"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="@{viewModel.addressAvailable ? View.GONE : View.VISIBLE}">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/str_msg_get_address_empty"
+          android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/address_create_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <Button
+          style="@style/App.Widget.Button.Filled.Colored"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:onClick="@{() -> viewModel.onCreateAddressClick()}"
+          android:text="@string/str_create_address"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="viewModel"
+      type="com.uberando.hipasar.ui.main.MainViewModel" />
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <fragment
+      android:id="@+id/main_nav_host"
+      android:name="androidx.navigation.fragment.NavHostFragment"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      app:defaultNavHost="true"
+      app:layout_constraintBottom_toTopOf="@id/main_bottom_separator"
+      app:layout_constraintTop_toTopOf="parent"
+      app:navGraph="@navigation/main_graph" />
+    <View
+      android:id="@+id/main_bottom_separator"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/grey_50_main"
+      android:visibility="@{viewModel.showBottomNavigation ? View.VISIBLE : View.GONE}"
+      app:layout_constraintBottom_toTopOf="@id/main_bottom_navigation" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+      android:id="@+id/main_bottom_navigation"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:visibility="@{viewModel.showBottomNavigation ? View.VISIBLE : View.GONE}"
+      app:itemIconTint="@color/bottom_nav_color_selector"
+      app:itemRippleColor="@color/teal_700_light"
+      app:itemTextColor="@color/bottom_nav_color_selector"
+      app:labelVisibilityMode="labeled"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:menu="@menu/main_nav_menu" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

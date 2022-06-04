@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="product"
+      type="com.uberando.hipasar.entity.CartProduct" />
+    <variable
+      name="listener"
+      type="com.uberando.hipasar.ui.adapter.product.ProductListener" />
+    <variable
+      name="amount"
+      type="String" />
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:background="?attr/selectableItemBackground"
+    android:onClick="@{() -> listener.clickProduct(product.id)}"
+    android:paddingStart="16dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="8dp">
+    <LinearLayout
+      android:id="@+id/center_container"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
+      android:orientation="vertical"
+      app:layout_constraintEnd_toStartOf="@id/end_container"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+      <TextView
+        android:id="@+id/product_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{product.name}"
+        android:textAppearance="@style/App.TextAppearance.Subtitle1"
+        tools:text="Cappuccino" />
+<!--      <Space-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="2dp" />-->
+<!--      <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:maxLines="2"-->
+<!--        android:text="@{product.description}"-->
+<!--        android:textAppearance="@style/App.TextAppearance.Subtitle2"-->
+<!--        tools:text="Coffee with expressed machine" />-->
+      <Space
+        android:layout_width="wrap_content"
+        android:layout_height="4dp" />
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+          android:id="@+id/cart_product_price"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:setText_price_int="@{product.price}"
+          tools:text="$2.32" />
+        <TextView
+          android:id="@+id/product_unit"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@{@string/str_template_weight_per(product.unitPerGram)}"
+          android:textAppearance="@style/App.TextAppearance.Caption"
+          app:layout_constraintBaseline_toBaselineOf="@id/cart_product_price"
+          app:layout_constraintStart_toEndOf="@id/cart_product_price"
+          tools:text="/100 g" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+<!--      <Space-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="4dp" />-->
+<!--      <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@{@string/str_template_min_order(product.minimumQuantity)}"-->
+<!--        android:textAppearance="@style/App.TextAppearance.Caption"-->
+<!--        tools:text="*minimum 1 item" />-->
+    </LinearLayout>
+    <LinearLayout
+      android:id="@+id/end_container"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:gravity="center"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent">
+      <androidx.cardview.widget.CardView
+        android:id="@+id/product_image_card"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+          android:layout_width="@dimen/item_cart_product_image_size"
+          android:layout_height="@dimen/item_cart_product_image_size"
+          android:contentDescription="@string/cd_product_image"
+          android:scaleType="centerCrop"
+          app:setImage_product="@{product.image.path}" />
+      </androidx.cardview.widget.CardView>
+      <Space
+        android:layout_width="wrap_content"
+        android:layout_height="8dp" />
+      <LinearLayout
+        android:id="@+id/product_amount_container"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_button_amount_container"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+          android:id="@+id/product_decrease_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/ic_remove_circle_brown_24"
+          android:contentDescription="@string/cd_decrease_button" />
+        <TextView
+          android:layout_width="32dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="4dp"
+          android:layout_marginEnd="4dp"
+          android:gravity="center"
+          android:text="@{amount}"
+          android:textAppearance="@style/App.TextAppearance.Subtitle1"
+          tools:text="1" />
+        <ImageButton
+          android:id="@+id/product_increase_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/ic_add_circle_brown_24"
+          android:contentDescription="@string/cd_increase_button" />
+      </LinearLayout>
+    </LinearLayout>
+    <ImageButton
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/normal_size"
+      android:background="@drawable/bg_button_remove"
+      android:contentDescription="@string/cd_remove_button"
+      android:onClick="@{() -> listener.removeProduct(product.id)}"
+      android:src="@drawable/ic_outline_delete_outline_24"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/end_container" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

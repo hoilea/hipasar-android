@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="productOnCart"
+      type="Boolean" />
+    <variable
+      name="productOnCartAmount"
+      type="Integer" />
+  </data>
+  <FrameLayout
+    style="@android:style/Widget.ActionButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+      android:id="@+id/action_layout_cart_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:contentDescription="@string/cd_cart_image"
+      android:src="@drawable/ic_outline_shopping_cart_24" />
+    <TextView
+      android:id="@+id/action_layout_cart_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:layout_marginStart="@dimen/menu_item_badge_size"
+      android:layout_marginBottom="8dp"
+      android:background="@drawable/menu_item_badge_background"
+      android:text="@{productOnCartAmount.toString()}"
+      android:textAppearance="@style/App.TextAppearance.Caption.Bold"
+      android:textColor="@color/white"
+      android:visibility="@{productOnCart ? View.VISIBLE : View.GONE}"
+      tools:text="20" />
+  </FrameLayout>
+</layout>

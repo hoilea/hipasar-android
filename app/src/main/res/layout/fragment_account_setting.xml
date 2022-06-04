@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <variable
+      name="viewModel"
+      type="com.uberando.hipasar.ui.main.account.setting.AccountSettingViewModel" />
+  </data>
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+      style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <androidx.appcompat.widget.Toolbar
+        style="@style/Widget.MaterialComponents.Toolbar.Surface"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:setOnClick_navigationIcon="@{() -> viewModel.onNavigationIconClick()}"
+        app:title="@string/str_account_setting" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fillViewport="true"
+      app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/standard_edge_space"
+        android:paddingEnd="@dimen/standard_edge_space">
+        <Space
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/content_container_space" />
+        <LinearLayout
+          android:id="@+id/account_image_container"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:orientation="vertical">
+          <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_update_image"
+            android:layout_width="@dimen/profile_image_size"
+            android:layout_height="@dimen/profile_image_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:set_profile_image="@{viewModel.user.image.path}"
+            tools:src="@drawable/avatar_1" />
+          <Button
+            style="@style/App.Widget.Button.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:onClick="@{() -> viewModel.onChangePhotoClick()}"
+            app:setButtonText_condition='@{viewModel.user.image != null &amp;&amp; viewModel.user.image.path != "null"}'
+            app:setButtonText_conditionFalse="@{@string/str_set}"
+            app:setButtonText_conditionTrue="@{@string/str_change}"
+            tools:text="@string/str_change"/>
+        </LinearLayout>
+        <Space
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/content_container_space" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+          <TextView
+            android:id="@+id/account_name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_name"
+            android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/account_name_title"
+            app:setText_userProfileName="@{viewModel.user.name}"
+            app:setText_userProfileName_alternative="@{viewModel.user.email}"
+            tools:text="Alexander " />
+          <Button
+            style="@style/App.Widget.Button.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onChangeNameClick()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:setButtonText_condition='@{viewModel.user.name != null &amp;&amp; viewModel.user.name != "null"}'
+            app:setButtonText_conditionFalse="@{@string/str_set}"
+            app:setButtonText_conditionTrue="@{@string/str_change}"
+            tools:text="@string/str_change" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <Space
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/content_container_space" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+          <TextView
+            android:id="@+id/account_email_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_email"
+            android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/account_email_title"
+            app:setText_content="@{viewModel.user.email}"
+            tools:text="Alexander@mail.com" />
+          <Button
+            style="@style/App.Widget.Button.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onChangeEmailClick()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:setButtonText_condition='@{viewModel.user.email != null &amp;&amp; viewModel.user.email != "null"}'
+            app:setButtonText_conditionFalse="@{@string/str_set}"
+            app:setButtonText_conditionTrue="@{@string/str_change}"
+            tools:text="@string/str_change" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <Space
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/content_container_space" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+          <TextView
+            android:id="@+id/account_password_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_password"
+            android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/account_password_title"
+            app:setText_contentPassword="@{viewModel.user.passwordAvailable}"
+            tools:text="########" />
+          <Button
+            style="@style/App.Widget.Button.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onChangePasswordClick()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:setButtonText_condition='@{viewModel.user.passwordAvailable}'
+            app:setButtonText_conditionFalse="@{@string/str_set}"
+            app:setButtonText_conditionTrue="@{@string/str_change}"
+            tools:text="@string/str_change" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+      </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

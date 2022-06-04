@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="feedback"
+      type="com.uberando.hipasar.entity.ProductFeedback" />
+    <variable
+      name="imageAvailable"
+      type="Boolean" />
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/normal_size">
+    <RatingBar
+      android:id="@+id/product_feedback_rating"
+      style="?android:attr/ratingBarStyleSmall"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:numStars="@{feedback.rating}"
+      android:stepSize="0.01"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+    <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/product_feedback_user_image"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/product_feedback_rating"
+      app:set_profile_image="@{feedback.user.image.path}" />
+    <TextView
+      android:id="@+id/product_feedback_user_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:textAppearance="@style/App.TextAppearance.Subtitle2"
+      app:layout_constraintBottom_toBottomOf="@id/product_feedback_user_image"
+      app:layout_constraintStart_toEndOf="@id/product_feedback_user_image"
+      app:layout_constraintTop_toTopOf="@id/product_feedback_user_image"
+      app:setText_userProfileName="@{feedback.user.name}"
+      app:setText_userProfileName_alternative="@{feedback.user.email}"
+      tools:text="Sumarni" />
+    <TextView
+      android:id="@+id/product_feedback_comment"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@{feedback.comment}"
+      android:textAppearance="@style/App.TextAppearance.Subtitle2"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/product_feedback_user_name"
+      tools:text="Full comment" />
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/product_feedback_image_list"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:visibility="@{imageAvailable ? View.VISIBLE : View.GONE}"
+      android:nestedScrollingEnabled="false"
+      android:orientation="horizontal"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/product_feedback_comment"
+      tools:itemCount="3"
+      tools:listitem="@layout/item_image_small" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

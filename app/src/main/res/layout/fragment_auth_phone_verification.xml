@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="android.view.View" />
+    <import type="com.uberando.hipasar.util.ExtensionsKt" />
+    <variable
+      name="viewModel"
+      type="com.uberando.hipasar.ui.auth.verification.AuthPhoneVerificationViewModel" />
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+      android:id="@+id/auth_verification_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="56dp"
+      android:text="@string/str_enter_verification_code"
+      android:textAppearance="@style/App.TextAppearance.Headline6.Bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+      android:id="@+id/auth_phone_verification_message"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="16dp"
+      android:gravity="center_horizontal"
+      android:text="@{String.format(@string/str_template_verification_code, viewModel.phoneNumber)}"
+      android:textAppearance="@style/App.TextAppearance.Subtitle1"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/auth_verification_title" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/auth_phone_verification_output_container"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="40dp"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/auth_phone_verification_message">
+
+      <LinearLayout
+        android:id="@+id/box_1"
+        android:layout_width="@dimen/phone_verification_box_width"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/box_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+          app:setText_charPosition="@{0}"
+          app:setText_charString="@{viewModel.codeCharacters}"
+          tools:text="5" />
+
+        <View
+          android:layout_width="40dp"
+          android:layout_height="@dimen/phone_verification_box_view_height"
+          android:background="@color/black" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/box_2"
+        android:layout_width="@dimen/phone_verification_box_width"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/box_3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/box_1"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+          app:setText_charPosition="@{1}"
+          app:setText_charString="@{viewModel.codeCharacters}"
+          tools:text="5" />
+
+        <View
+          android:layout_width="40dp"
+          android:layout_height="@dimen/phone_verification_box_view_height"
+          android:background="@color/black" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/box_3"
+        android:layout_width="@dimen/phone_verification_box_width"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/box_4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/box_2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+          app:setText_charPosition="@{2}"
+          app:setText_charString="@{viewModel.codeCharacters}"
+          tools:text="5" />
+
+        <View
+          android:layout_width="40dp"
+          android:layout_height="@dimen/phone_verification_box_view_height"
+          android:background="@color/black" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/box_4"
+        android:layout_width="@dimen/phone_verification_box_width"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/box_5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/box_3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+          app:setText_charPosition="@{3}"
+          app:setText_charString="@{viewModel.codeCharacters}"
+          tools:text="5" />
+
+        <View
+          android:layout_width="40dp"
+          android:layout_height="@dimen/phone_verification_box_view_height"
+          android:background="@color/black" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/box_5"
+        android:layout_width="@dimen/phone_verification_box_width"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/box_6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/box_4"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+          app:setText_charPosition="@{4}"
+          app:setText_charString="@{viewModel.codeCharacters}"
+          tools:text="5" />
+
+        <View
+          android:layout_width="40dp"
+          android:layout_height="@dimen/phone_verification_box_view_height"
+          android:background="@color/black" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/box_6"
+        android:layout_width="@dimen/phone_verification_box_width"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/box_5"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+          app:setText_charPosition="@{5}"
+          app:setText_charString="@{viewModel.codeCharacters}"
+          tools:text="5" />
+
+        <View
+          android:layout_width="40dp"
+          android:layout_height="@dimen/phone_verification_box_view_height"
+          android:background="@color/black" />
+      </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_margin="32dp"
+      app:layout_constraintBottom_toTopOf="@id/resend_container"
+      app:layout_constraintTop_toBottomOf="@id/auth_phone_verification_output_container">
+
+      <Button
+        android:id="@+id/button_number_one"
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="@dimen/phone_verification_key_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> viewModel.addCharacter('1')}"
+        android:text="@string/str_number_one"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toBottomOf="@+id/button_number_two"
+        app:layout_constraintEnd_toStartOf="@+id/button_number_two"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_number_two" />
+
+      <Button
+        android:id="@+id/button_number_two"
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="@dimen/phone_verification_key_width"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> viewModel.addCharacter('2')}"
+        android:text="@string/str_number_two"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toBottomOf="@+id/button_number_three"
+        app:layout_constraintEnd_toStartOf="@+id/button_number_three"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_number_one"
+        app:layout_constraintTop_toTopOf="@+id/button_number_three"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+      <Button
+        android:id="@+id/button_number_three"
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="@dimen/phone_verification_key_width"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> viewModel.addCharacter('3')}"
+        android:text="@string/str_number_three"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toTopOf="@+id/button_number_six"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_number_two"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <Button
+        android:id="@+id/button_number_four"
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="@dimen/phone_verification_key_width"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> viewModel.addCharacter('4')}"
+        android:text="@string/str_number_four"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toBottomOf="@+id/button_number_five"
+        app:layout_constraintEnd_toStartOf="@+id/button_number_five"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_number_five" />
+
+      <Button
+        android:id="@+id/button_number_five"
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="@dimen/phone_verification_key_width"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> viewModel.addCharacter('5')}"
+        android:text="@string/str_number_five"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toBottomOf="@+id/button_number_six"
+        app:layout_constraintEnd_toStartOf="@+id/button_number_six"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_number_four"
+        app:layout_constraintTop_toTopOf="@+id/button_number_six" />
+
+      <Button
+        android:id="@+id/button_number_six"
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="@dimen/phone_verification_key_width"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> viewModel.addCharacter('6')}"
+        android:text="@string/str_number_six"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toTopOf="@+id/button_number_nine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_number_five"
+        app:layout_constraintTop_toBottomOf="@+id/button_number_three" />
+
+      <Button
+        android:id="@+id/button_number_seven"
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="@dimen/phone_verification_key_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> viewModel.addCharacter('7')}"
+        android:text="@string/str_number_seven"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toBottomOf="@+id/button_number_eight"
+        app:layout_constraintEnd_toStartOf="@+id/button_number_eight"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_number_eight" />
+
+      <Button
+        android:id="@+id/button_number_eight"
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="@dimen/phone_verification_key_width"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> viewModel.addCharacter('8')}"
+        android:text="@string/str_number_eight"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toBottomOf="@+id/button_number_nine"
+        app:layout_constraintEnd_toStartOf="@+id/button_number_nine"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_number_seven"
+        app:layout_constraintTop_toTopOf="@+id/button_number_nine" />
+
+      <Button
+        android:id="@+id/button_number_nine"
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="@dimen/phone_verification_key_width"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> viewModel.addCharacter('9')}"
+        android:text="@string/str_number_nine"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toTopOf="@+id/button_number_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_number_eight"
+        app:layout_constraintTop_toBottomOf="@+id/button_number_six" />
+
+      <Button
+        android:id="@+id/button_number_empty"
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="@dimen/phone_verification_key_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_number_zero"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_number_seven" />
+
+      <Button
+        android:id="@+id/button_number_zero"
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="@dimen/phone_verification_key_width"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> viewModel.addCharacter('0')}"
+        android:text="@string/str_number_zero"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toBottomOf="@+id/button_number_empty"
+        app:layout_constraintEnd_toEndOf="@id/button_number_eight"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/button_number_eight"
+        app:layout_constraintTop_toTopOf="@+id/button_number_empty" />
+
+      <ImageButton
+        android:id="@+id/button_number_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_outline_backspace_32"
+        android:contentDescription="@string/cd_delete_button"
+        android:onClick="@{() -> viewModel.removeCharacter()}"
+        android:textAppearance="@style/App.TextAppearance.Headline4.Bold"
+        app:layout_constraintBottom_toBottomOf="@+id/button_number_zero"
+        app:layout_constraintEnd_toEndOf="@id/button_number_nine"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/button_number_nine"
+        app:layout_constraintTop_toTopOf="@+id/button_number_zero" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/resend_container"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/normal_size"
+      app:layout_constraintBottom_toBottomOf="parent">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{String.format(@string/str_template_allow_resend_message, viewModel.remainingTimeString)}"
+        android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+        android:visibility="@{viewModel.showSendCodeTimer ? View.VISIBLE : View.GONE}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+      <Button
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onResendButtonClick()}"
+        android:text="@string/str_resend_verification_code"
+        android:visibility="@{viewModel.showSendCodeTimer ? View.GONE : View.VISIBLE}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

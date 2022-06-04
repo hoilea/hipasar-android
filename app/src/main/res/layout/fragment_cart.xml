@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="viewModel"
+      type="com.uberando.hipasar.ui.main.cart.CartViewModel" />
+  </data>
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      style="@style/Widget.MaterialComponents.AppBarLayout.Surface">
+      <androidx.appcompat.widget.Toolbar
+        android:id="@+id/cart_toolbar"
+        style="@style/Widget.MaterialComponents.Toolbar.Surface"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:setOnClick_navigationIcon="@{() -> viewModel.onBackButtonClick()}"
+        app:title="@string/str_cart" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cart_main_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="@{viewModel.showContentContainer ? View.VISIBLE : View.GONE}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cart_footer_container">
+        <com.facebook.shimmer.ShimmerFrameLayout
+          android:id="@+id/cart_main_placeholder"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:visibility="@{viewModel.showMainLoadingIndicator ? View.VISIBLE : View.GONE}"
+          app:shimmer_auto_start="false"
+          tools:visibility="gone">
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <include layout="@layout/item_product_shimmer" />
+            <include layout="@layout/item_product_shimmer" />
+            <include layout="@layout/item_product_shimmer" />
+            <include layout="@layout/item_product_shimmer" />
+            <include layout="@layout/item_product_shimmer" />
+            <include layout="@layout/item_product_shimmer" />
+            <include layout="@layout/item_product_shimmer" />
+          </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/cart_product_list"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:visibility="@{viewModel.showMainLoadingIndicator ? View.GONE : View.VISIBLE}"
+          app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cart_footer_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="@{viewModel.showContentContainer ? View.VISIBLE : View.GONE}"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <com.facebook.shimmer.ShimmerFrameLayout
+          android:id="@+id/cart_footer_placeholder"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:visibility="@{viewModel.showFooterLoadingIndicator ? View.VISIBLE : View.GONE}"
+          app:shimmer_auto_start="false"
+          tools:visibility="gone">
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <View
+              android:layout_width="80dp"
+              android:layout_height="24dp"
+              android:background="@color/grey_100_dark" />
+            <Space
+              android:layout_width="wrap_content"
+              android:layout_height="4dp" />
+            <View
+              android:layout_width="160dp"
+              android:layout_height="24dp"
+              android:background="@color/grey_100_dark" />
+          </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/cart_footer_content"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:visibility="@{viewModel.showFooterLoadingIndicator ? View.GONE : View.VISIBLE}">
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_100_main"
+            app:layout_constraintTop_toTopOf="parent" />
+          <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/str_total_price"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+              app:setText_price_int="@{viewModel.computedPrice}"
+              tools:text="5.000 W" />
+          </LinearLayout>
+          <Button
+            style="@style/App.Widget.Button.Filled.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{() -> viewModel.onOrderButtonClick()}"
+            android:text="@string/str_checkout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cart_empty_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="@{viewModel.showCartEmptyMessage ? View.VISIBLE : View.GONE}"
+        tools:visibility="gone">
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:text="@string/str_msg_cart_empty" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cart_failed_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="@{viewModel.showFailedMessage ? View.VISIBLE : View.GONE}"
+        tools:visibility="gone">
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:text="@string/str_msg_get_data_failed" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="@{viewModel.showUnauthorizedMessage ? View.VISIBLE : View.GONE}"
+        tools:visibility="gone">
+        <TextView
+          android:id="@+id/cart_unauthorized_text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:text="@string/str_msg_get_cart_unauthorized"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+        <Button
+          style="@style/App.Widget.Button.Filled.Colored"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:onClick="@{() -> viewModel.onLoginButtonClick()}"
+          android:text="@string/str_login"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/cart_unauthorized_text" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

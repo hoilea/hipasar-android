@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <!-- Base application theme. -->
+  <style name="Theme.HipasarAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <!-- Primary brand color. -->
+    <item name="colorPrimary">@color/teal_700_main</item>
+    <item name="colorPrimaryVariant">@color/teal_700_dark</item>
+    <item name="colorOnPrimary">@color/white</item>
+    <!-- Secondary brand color. -->
+    <item name="colorSecondary">@color/blue_main</item>
+    <item name="colorSecondaryVariant">@color/blue_dark</item>
+    <item name="colorOnSecondary">@color/white</item>
+    <!-- Status bar color. -->
+    <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    <!-- Customize your theme here. -->
+    <item name="tabStyle">@style/App.ThemeOverlay.TabLayout</item>
+    <item name="buttonColor">@color/teal_700_main</item>
+  </style>
+
+  <style name="App.ThemeOverlay.TabLayout" parent="">
+    <item name="colorPrimary">?attr/colorOnSurface</item>
+  </style>
+</resources>

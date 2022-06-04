@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="com.uberando.hipasar.util.Constants" />
+    <variable
+      name="order"
+      type="com.uberando.hipasar.entity.Order" />
+    <variable
+      name="listener"
+      type="com.uberando.hipasar.ui.adapter.order.OrderListener" />
+  </data>
+  <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/normal_size"
+    app:cardCornerRadius="@dimen/card_corner_radius">
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackground"
+      android:onClick="@{() -> listener.onItemClick(order)}">
+      <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+      <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+      <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="16dp" />
+      <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="16dp" />
+      <View
+        android:layout_width="@dimen/view_marker_size"
+        android:layout_height="0dp"
+        android:background="@color/red_900_main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+      <TextView
+        android:id="@+id/order_pending_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_status_admin_cancel"
+        android:textAppearance="@style/App.TextAppearance.Subtitle2.Bold"
+        app:layout_constraintStart_toStartOf="@id/start_guideline"
+        app:layout_constraintTop_toTopOf="@id/top_guideline" />
+      <TextView
+        android:id="@+id/order_pending_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{@string/str_template_order_code(order.orderCode)}"
+        android:textAppearance="@style/App.TextAppearance.Caption"
+        app:layout_constraintStart_toStartOf="@id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/order_pending_status"
+        tools:text="#34323KM3K" />
+      <TextView
+        android:id="@+id/order_pending_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/App.TextAppearance.Subtitle2.Bold"
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintTop_toTopOf="@id/top_guideline"
+        app:setText_datetime="@{order.orderedAt}"
+        tools:text="April 20 2021" />
+      <TextView
+        android:id="@+id/order_payment_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{order.paymentType.name ?? Constants.PAYMENT_TYPE_COD}"
+        android:textAppearance="@style/App.TextAppearance.Subtitle2.Colored.Green.Bold"
+        app:layout_constraintEnd_toStartOf="@id/end_guideline"
+        app:layout_constraintTop_toBottomOf="@id/order_pending_date"
+        tools:text="OVO" />
+      <TextView
+        android:id="@+id/order_pending_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_size"
+        android:text="@{@string/str_template_order_product(order.totalProducts)}"
+        android:textAppearance="@style/App.TextAppearance.Subtitle2"
+        app:layout_constraintStart_toStartOf="@id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/order_pending_code"
+        tools:text="Order 3 products" />
+      <TextView
+        android:id="@+id/order_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/App.TextAppearance.Subtitle2.Bold"
+        app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
+        app:layout_constraintStart_toStartOf="@id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/order_pending_information"
+        app:setText_price_int="@{order.total}"
+        tools:text="5.000 ₩" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.cardview.widget.CardView>
+</layout>

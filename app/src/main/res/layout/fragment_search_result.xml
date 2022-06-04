@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="viewModel"
+      type="com.uberando.hipasar.ui.main.search.SearchResultViewModel" />
+  </data>
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+      style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <androidx.appcompat.widget.Toolbar
+        android:id="@+id/search_result_toolbar"
+        style="@style/Widget.MaterialComponents.Toolbar.Surface"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStartWithNavigation="0dp"
+        app:menu="@menu/home_menu"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:setOnClick_navigationIcon="@{() -> viewModel.onBackButtonClick()}">
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="40dp"
+          android:background="@drawable/bg_search_box"
+          android:onClick="@{() -> viewModel.onSearchBoxClick()}">
+          <ImageView
+            android:id="@+id/search_query_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@string/cd_search_icon"
+            android:src="@drawable/ic_outline_search_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+          <TextView
+            style="@style/App.TextAppearance.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{viewModel.searchBoxValue}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/search_query_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+      </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+      <ProgressBar
+        android:layout_width="@dimen/progress_bar_size"
+        android:layout_height="@dimen/progress_bar_size"
+        android:layout_gravity="center"
+        android:visibility="@{viewModel.showLoadingIndicator ? View.VISIBLE : View.GONE}" />
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_result_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="@{viewModel.showResultContainer ? View.VISIBLE : View.GONE}" />
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="@{viewModel.showNoResultContainer ? View.VISIBLE : View.GONE}">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/str_no_result_found"
+          android:textAppearance="@style/App.TextAppearance.Subtitle2"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="@{viewModel.showErrorContainer ? View.VISIBLE : View.GONE}"
+        tools:visibility="gone">
+        <TextView
+          android:id="@+id/search_result_failed_message"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/str_msg_get_search_result_failed"
+          android:textAppearance="@style/App.TextAppearance.Headline6.Bold"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+        <Button
+          style="@style/App.Widget.Button.Filled.Colored"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:onClick="@{() -> viewModel.onRetryButtonClick()}"
+          android:text="@string/str_retry"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/search_result_failed_message" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

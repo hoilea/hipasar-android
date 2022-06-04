@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <variable
+      name="product"
+      type="com.uberando.hipasar.entity.OrderProduct" />
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/start_guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_begin="8dp" />
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/end_guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_end="8dp" />
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/top_guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_begin="8dp" />
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/bottom_guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_end="8dp" />
+    <androidx.cardview.widget.CardView
+      android:id="@+id/product_image_card"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      app:cardCornerRadius="8dp"
+      app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+      app:layout_constraintStart_toStartOf="@id/start_guideline"
+      app:layout_constraintTop_toTopOf="@id/top_guideline">
+      <ImageView
+        android:layout_width="@dimen/item_product_image_size"
+        android:layout_height="@dimen/item_product_image_size"
+        android:contentDescription="@string/cd_product_image"
+        android:scaleType="centerCrop"
+        app:setImage_product="@{product.image.path}" />
+    </androidx.cardview.widget.CardView>
+    <TextView
+      android:id="@+id/product_title"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="@dimen/normal_size"
+      android:text="@{product.name}"
+      android:textAppearance="@style/App.TextAppearance.Subtitle1"
+      app:layout_constraintEnd_toStartOf="@id/product_total_price_container"
+      app:layout_constraintStart_toEndOf="@id/product_image_card"
+      app:layout_constraintTop_toTopOf="@id/top_guideline"
+      tools:text="Cappuccino" />
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="4dp"
+      android:orientation="horizontal"
+      android:gravity="center_vertical"
+      app:layout_constraintStart_toEndOf="@id/product_image_card"
+      app:layout_constraintTop_toBottomOf="@id/product_title">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/App.TextAppearance.Subtitle2"
+        android:text="@{@string/str_template_order_amount(product.qty)}"
+        tools:text="1 x" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textAppearance="@style/App.TextAppearance.Subtitle2"
+        app:setText_price_int="@{product.price}"
+        tools:text="2.32" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{@string/str_template_weight_per(product.unitPerGram)}"
+        android:textAppearance="@style/App.TextAppearance.Caption"
+        tools:text="/100 g" />
+    </LinearLayout>
+    <LinearLayout
+      android:id="@+id/product_total_price_container"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      android:orientation="vertical"
+      app:layout_constraintEnd_toEndOf="@id/end_guideline"
+      app:layout_constraintTop_toTopOf="@id/top_guideline">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_total_price"
+        android:textAppearance="@style/App.TextAppearance.Subtitle2" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/App.TextAppearance.Subtitle2.Bold"
+        app:setText_price_int="@{product.finalPrice}"
+        tools:text="2.32" />
+    </LinearLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

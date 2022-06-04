@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/address_graph"
+  app:startDestination="@id/addressModifyFragment">
+  <fragment
+    android:id="@+id/addressModifyFragment"
+    android:name="com.uberando.hipasar.ui.address.modify.AddressModifyFragment"
+    android:label="AddressModifyFragment" >
+    <argument
+      android:name="address"
+      app:argType="com.uberando.hipasar.entity.Address"
+      app:nullable="true"
+      android:defaultValue="@null" />
+    <action
+      android:id="@+id/action_addressModifyFragment_to_addressSelectLocationFragment"
+      app:destination="@id/addressSelectLocationFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/addressSelectLocationFragment"
+    android:name="com.uberando.hipasar.ui.address.modify.select.AddressSelectLocationFragment"
+    android:label="AddressSelectLocationFragment" >
+    <argument
+      android:name="kecamatanId"
+      app:argType="long"
+      android:defaultValue="-1L" />
+  </fragment>
+</navigation>

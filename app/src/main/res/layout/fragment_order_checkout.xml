@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="viewModel"
+      type="com.uberando.hipasar.ui.order.checkout.OrderCheckoutViewModel" />
+  </data>
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+      style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <androidx.appcompat.widget.Toolbar
+        style="@style/Widget.MaterialComponents.ActionBar.Surface"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:setOnClick_navigationIcon="@{() -> viewModel.onBackButtonClick()}"
+        app:title="@string/str_order_confirmation" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="@{viewModel.showLoadingIndicator ? View.VISIBLE : View.GONE}"
+        tools:visibility="gone">
+        <ProgressBar
+          android:layout_width="@dimen/progress_bar_size"
+          android:layout_height="@dimen/progress_bar_size" />
+      </LinearLayout>
+      <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="@{viewModel.showContentContainer ? View.VISIBLE : View.GONE}">
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:padding="8dp">
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/str_shipping_address"
+              android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
+            <Button
+              style="@style/App.Widget.Button.Text"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:onClick="@{() -> viewModel.onChangeSelectAddressClick()}"
+              android:text="@{viewModel.addressSelectionButtonText}"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              tools:text="Change Address" />
+          </androidx.constraintlayout.widget.ConstraintLayout>
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.showAddressContainer ? View.VISIBLE : View.GONE}">
+            <androidx.constraintlayout.widget.Guideline
+              android:id="@+id/start_guideline"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              app:layout_constraintGuide_begin="0dp" />
+            <androidx.constraintlayout.widget.Guideline
+              android:id="@+id/end_guideline"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              app:layout_constraintGuide_end="0dp" />
+            <androidx.constraintlayout.widget.Guideline
+              android:id="@+id/top_guideline"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              app:layout_constraintGuide_begin="8dp" />
+            <androidx.constraintlayout.widget.Guideline
+              android:id="@+id/bottom_guideline"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              app:layout_constraintGuide_end="8dp" />
+            <TextView
+              android:id="@+id/address_receiver_name"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@{viewModel.selectedAddress.receiverName}"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2"
+              app:layout_constraintStart_toStartOf="@id/start_guideline"
+              app:layout_constraintTop_toTopOf="@id/top_guideline"
+              tools:text="ARYA NAHLA" />
+            <TextView
+              android:id="@+id/address_basic"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="4dp"
+              android:text="@{viewModel.selectedAddress.basicAddress}"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2.Bold"
+              app:layout_constraintEnd_toEndOf="@id/end_guideline"
+              app:layout_constraintStart_toStartOf="@id/start_guideline"
+              app:layout_constraintTop_toBottomOf="@id/address_receiver_name"
+              tools:text="Kota Kabupaten" />
+            <TextView
+              android:id="@+id/address_phone"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="2dp"
+              android:text="@{viewModel.selectedAddress.phone}"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2"
+              app:layout_constraintStart_toStartOf="@id/start_guideline"
+              app:layout_constraintTop_toBottomOf="@id/address_basic"
+              tools:text="+62 85 315 903 382" />
+            <TextView
+              android:id="@+id/address_detail"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="2dp"
+              android:text="@{viewModel.selectedAddress.detailAddress}"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2"
+              app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+              app:layout_constraintEnd_toEndOf="@id/end_guideline"
+              app:layout_constraintStart_toStartOf="@id/start_guideline"
+              app:layout_constraintTop_toBottomOf="@id/address_phone"
+              tools:text="Jalan panji no 89 rt 18 rw 04 kelurahan padang pasar panjang" />
+          </androidx.constraintlayout.widget.ConstraintLayout>
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_100_main" />
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="8dp" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+            android:text="@string/str_delivery_date_and_time" />
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="4dp" />
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_delivery_time_selector"
+            android:onClick="@{() -> viewModel.onSelectDeliveryDateClick()}">
+            <ImageView
+              android:id="@+id/checkout_delivery_time_icon"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="@dimen/normal_size"
+              android:src="@drawable/ic_outline_calendar_today_24"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent" />
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="@dimen/normal_size"
+              android:layout_marginEnd="@dimen/normal_size"
+              android:text="@string/str_delivery_date_not_selected"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2"
+              android:visibility="@{viewModel.deliveryDateSelected ? View.GONE : View.VISIBLE}"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@id/checkout_delivery_time_icon"
+              app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="@dimen/normal_size"
+              android:layout_marginEnd="@dimen/normal_size"
+              android:text="@{viewModel.selectedDeliveryDate}"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2"
+              android:visibility="@{viewModel.deliveryDateSelected ? View.VISIBLE : View.GONE}"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@id/checkout_delivery_time_icon"
+              app:layout_constraintTop_toTopOf="parent" />
+          </androidx.constraintlayout.widget.ConstraintLayout>
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="4dp" />
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_delivery_time_selector"
+            android:onClick="@{() -> viewModel.onSelectDeliveryTimeClick()}">
+            <ImageView
+              android:id="@+id/checkout_delivery_date_icon"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="@dimen/normal_size"
+              android:src="@drawable/ic_outline_access_time_24"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent" />
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="@dimen/normal_size"
+              android:layout_marginEnd="@dimen/normal_size"
+              android:text="@string/str_delivery_time_not_selected"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2"
+              android:visibility="@{viewModel.deliveryTimeSelected ? View.GONE : View.VISIBLE}"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@id/checkout_delivery_date_icon"
+              app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="@dimen/normal_size"
+              android:layout_marginEnd="@dimen/normal_size"
+              android:text="@{viewModel.selectedDeliveryTimeText}"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2"
+              android:visibility="@{viewModel.deliveryTimeSelected ? View.VISIBLE : View.GONE}"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@id/checkout_delivery_date_icon"
+              app:layout_constraintTop_toTopOf="parent" />
+          </androidx.constraintlayout.widget.ConstraintLayout>
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="8dp" />
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_100_main" />
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="8dp" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+            android:text="@string/str_order_product" />
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="4dp" />
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/order_product_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="8dp" />
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_100_main" />
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="8dp" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+            android:text="@string/str_payment_details" />
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="4dp" />
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:visibility="@{viewModel.showPriceComputeLoadingIndicator ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/order_subtotal_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/str_template_price_with_product(viewModel.orderProducts.size)}"
+                android:textAppearance="@style/App.TextAppearance.Subtitle2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Total Price (1 product)" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/App.TextAppearance.Subtitle2.Bold"
+                app:layout_constraintBottom_toBottomOf="@id/order_subtotal_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/order_subtotal_title"
+                app:setText_price_int="@{viewModel.subtotal}"
+                tools:text="5.000" />
+            <TextView
+                android:id="@+id/order_shipping_fee_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_shipping_fee"
+                android:textAppearance="@style/App.TextAppearance.Subtitle2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_tax_title" />
+            <TextView
+                android:id="@+id/order_shipping_fee_free_caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/str_msg_shipping_fee_free"
+                android:textAppearance="@style/App.TextAppearance.Caption"
+                android:visibility="@{viewModel.shippingIsFree ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_shipping_fee_title" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/App.TextAppearance.Subtitle2.Bold"
+                app:layout_constraintBottom_toBottomOf="@id/order_shipping_fee_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/order_shipping_fee_title"
+                app:setText_price_int="@{viewModel.shippingFee}"
+                tools:text="5.000" />
+            <TextView
+              android:id="@+id/order_tax_title"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@{@string/str_template_tax_percentage(viewModel.taxPercentage)}"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2"
+              android:visibility="gone"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/order_subtotal_title"
+              tools:text="Tax" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2.Bold"
+              android:visibility="gone"
+              app:layout_constraintBottom_toBottomOf="@id/order_tax_title"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintTop_toTopOf="@id/order_tax_title"
+              app:setText_price_int="@{viewModel.tax}"
+              tools:text="5.000" />
+            <View
+                android:id="@+id/order_separator_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/grey_100_main"
+                app:layout_constraintTop_toBottomOf="@id/order_shipping_fee_free_caption" />
+            <TextView
+                android:id="@+id/order_final_price_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/str_final_price"
+                android:textAppearance="@style/App.TextAppearance.Subtitle2.Bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_separator_1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/App.TextAppearance.Subtitle2.Bold"
+                app:layout_constraintBottom_toBottomOf="@id/order_final_price_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/order_final_price_title"
+                app:setText_price_int="@{viewModel.totalPrice}"
+                tools:text="5.000" />
+          </androidx.constraintlayout.widget.ConstraintLayout>
+          <Space
+              android:layout_width="wrap_content"
+              android:layout_height="8dp" />
+          <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@color/grey_100_main" />
+          <Space
+              android:layout_width="wrap_content"
+              android:layout_height="8dp" />
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+            <TextView
+              android:id="@+id/checkout_payment_method_title"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/str_payment_method"
+              android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
+            <Button
+              style="@style/App.Widget.Button.Text"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/str_change"
+              android:onClick="@{() -> viewModel.onChangePaymentMethodClick()}"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="4dp"
+              android:text="@string/str_payment_method_not_selected"
+              android:textAppearance="@style/App.TextAppearance.Subtitle2"
+              android:visibility="@{viewModel.paymentMethodSelected ? View.GONE : View.VISIBLE}"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/checkout_payment_method_title"
+              tools:visibility="gone" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="4dp"
+              android:visibility="@{viewModel.paymentMethodSelected ? View.VISIBLE : View.GONE}"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/checkout_payment_method_title">
+              <ImageView
+                android:id="@+id/payment_method_icon"
+                android:layout_width="40dp"
+                android:layout_height="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setImage_product="@{viewModel.paymentMethod.iconPath}" />
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center_vertical"
+                android:text="@{viewModel.paymentMethod.name}"
+                android:textAppearance="@style/App.TextAppearance.Subtitle2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/payment_method_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="BCA" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+          </androidx.constraintlayout.widget.ConstraintLayout>
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="24dp" />
+          <Button
+            style="@style/App.Widget.Button.Filled.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onPayButtonClick()}"
+            android:text="@string/str_pay"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+      </androidx.core.widget.NestedScrollView>
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="@{viewModel.showErrorContainer ? View.VISIBLE : View.GONE}"
+        tools:visibility="gone">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/str_msg_process_checkout_failed"
+          android:textAppearance="@style/App.TextAppearance.Subtitle1.Bold"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+        <Button
+          style="@style/App.Widget.Button.Filled.Colored"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="16dp"
+          android:onClick="@{() -> viewModel.onRetryButtonClick()}"
+          android:text="@string/str_retry"
+          app:layout_constraintBottom_toBottomOf="parent" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

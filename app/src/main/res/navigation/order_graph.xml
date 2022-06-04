@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/order_graph"
+  app:startDestination="@id/orderCheckoutFragment">
+  <fragment
+    android:id="@+id/orderCheckoutFragment"
+    android:name="com.uberando.hipasar.ui.order.checkout.OrderCheckoutFragment"
+    android:label="OrderCheckoutFragment" >
+    <action
+      android:id="@+id/action_orderCheckoutFragment_to_paymentMethodFragment"
+      app:destination="@id/paymentMethodFragment" />
+    <action
+      android:id="@+id/action_orderCheckoutFragment_to_paymentEWalletFragment"
+      app:destination="@id/paymentEWalletFragment" />
+    <action
+      android:id="@+id/action_orderCheckoutFragment_to_orderChangeSelectAddressFragment"
+      app:destination="@id/orderChangeSelectAddressFragment" />
+    <action
+      android:id="@+id/action_orderCheckoutFragment_to_paymentVAFragment"
+      app:destination="@id/paymentVAFragment" />
+    <action
+      android:id="@+id/action_orderCheckoutFragment_to_selectDeliveryTimeFragment"
+      app:destination="@id/selectDeliveryTimeFragment" />
+    <action
+      android:id="@+id/action_orderCheckoutFragment_to_selectDeliveryDateFragment"
+      app:destination="@id/selectDeliveryDateFragment" />
+    <action
+      android:id="@+id/action_orderCheckoutFragment_to_orderLoadingFragment"
+      app:destination="@id/orderLoadingFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/orderChangeSelectAddressFragment"
+    android:name="com.uberando.hipasar.ui.order.address.OrderChangeSelectAddressFragment"
+    android:label="OrderChangeSelectAddressFragment" >
+    <argument
+      android:name="title"
+      app:argType="string"
+      android:defaultValue="Select Address" />
+    <argument
+      android:name="addresses"
+      app:argType="com.uberando.hipasar.entity.Address[]" />
+  </fragment>
+  <fragment
+    android:id="@+id/orderResultFragment"
+    android:name="com.uberando.hipasar.ui.order.result.OrderResultFragment"
+    android:label="OrderResultFragment" >
+    <argument
+      android:name="result"
+      app:argType="string" />
+  </fragment>
+  <fragment
+    android:id="@+id/paymentEWalletFragment"
+    android:name="com.uberando.hipasar.ui.order.payment.confirm.ewallet.PaymentEWalletFragment"
+    android:label="PaymentEWalletFragment" >
+    <argument
+      android:name="paymentRequest"
+      app:argType="com.uberando.hipasar.entity.request.PaymentRequest" />
+    <action
+      android:id="@+id/action_paymentEWalletFragment_to_orderLoadingFragment"
+      app:destination="@id/orderLoadingFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/paymentMethodFragment"
+    android:name="com.uberando.hipasar.ui.order.payment.method.PaymentMethodFragment"
+    android:label="PaymentMethodFragment" />
+  <fragment
+    android:id="@+id/orderLoadingFragment"
+    android:name="com.uberando.hipasar.ui.order.loading.OrderLoadingFragment"
+    android:label="OrderLoadingFragment" >
+    <action
+      android:id="@+id/action_orderLoadingFragment_to_orderResultFragment"
+      app:destination="@id/orderResultFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/paymentVAFragment"
+    android:name="com.uberando.hipasar.ui.order.payment.confirm.va.PaymentVAFragment"
+    android:label="PaymentVAFragment" >
+    <action
+      android:id="@+id/action_paymentVAFragment_to_orderLoadingFragment"
+      app:destination="@id/orderLoadingFragment" />
+    <argument
+      android:name="paymentRequest"
+      app:argType="com.uberando.hipasar.entity.request.PaymentRequest" />
+  </fragment>
+  <fragment
+    android:id="@+id/selectDeliveryTimeFragment"
+    android:name="com.uberando.hipasar.ui.order.delivery.SelectDeliveryTimeFragment"
+    android:label="SelectDeliveryTimeFragment" >
+    <argument
+      android:name="delivery_time"
+      app:argType="com.uberando.hipasar.entity.DeliveryTime[]" />
+  </fragment>
+  <fragment
+    android:id="@+id/addressModifyFragmentCheckout"
+    android:name="com.uberando.hipasar.ui.address.modify.AddressModifyFragment"
+    android:label="AddressModifyFragment">
+    <argument
+      android:name="address"
+      app:argType="com.uberando.hipasar.entity.Address"
+      app:nullable="true"
+      android:defaultValue="@null" />
+  </fragment>
+  <fragment
+    android:id="@+id/selectDeliveryDateFragment"
+    android:name="com.uberando.hipasar.ui.order.delivery.SelectDeliveryDateFragment"
+    android:label="SelectDeliveryDateFragment" >
+    <argument
+      android:name="delivery_date"
+      app:argType="string[]" />
+  </fragment>
+</navigation>

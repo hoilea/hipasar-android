@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "891814285630",
+    "project_id": "haipasar-696e4",
+    "storage_bucket": "haipasar-696e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891814285630:android:d15a8fca88bcb5478e9c6f",
+        "android_client_info": {
+          "package_name": "com.uberando.hipasar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891814285630-0g5hg7mchef8i8v9lmmtp7irfl3uofvf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCziJ2UudP5uTt3gDAbhvp9n6tx4JzbhA8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891814285630-0g5hg7mchef8i8v9lmmtp7irfl3uofvf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

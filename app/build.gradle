@@ -1,0 +1,117 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.uberando.hipasar"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "0.9.5"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        def serverHost = "https://api.hipasar.com"
+//        def serverHost = "http://192.168.100.134"
+        def serverPort = "3000"
+        def webPort = "8012"
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_API_URL", "\"$serverHost/api/\""
+            buildConfigField "String", "DAUM_URL", "\"$serverHost:$webPort/hisijang/address/daum.php\""
+            buildConfigField "String", "PAYMENT_URL", "\"$serverHost:$webPort/hisijang/payment/mobile/request.php\""
+            buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://hipasar.com/uszers/term-conditions-android\""
+            buildConfigField "String", "BASE_INDONESIAN_ADDRESS_API_URL", "\"https://dev.farizdotid.com/api/daerahindonesia/\""
+            buildConfigField "String", "DURIAN_PAY_CHECKOUT_URL", "\"https://checkout.durianpay.id/checkout/\""
+        }
+        debug {
+            buildConfigField "String", "BASE_API_URL", "\"$serverHost/api/\""
+            buildConfigField "String", "DAUM_URL", "\"$serverHost:$webPort/hisijang/address/daum.php\""
+            buildConfigField "String", "PAYMENT_URL", "\"$serverHost:$webPort/hisijang/payment/mobile/request.php\""
+            buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://hipasar.com/users/term-conditions-android\""
+            buildConfigField "String", "BASE_INDONESIAN_ADDRESS_API_URL", "\"https://dev.farizdotid.com/api/daerahindonesia/\""
+            buildConfigField "String", "DURIAN_PAY_CHECKOUT_URL", "\"https://checkout.durianpay.id/checkout/\""
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    // Kotlin libs
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
+
+    // Androidx libs
+    implementation "androidx.appcompat:appcompat:$androidx_appcompat_version"
+    implementation "androidx.constraintlayout:constraintlayout:$androidx_constraint_layout_version"
+    implementation "androidx.core:core-ktx:$androidx_core_ktx_version"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version"
+
+    implementation "androidx.room:room-runtime:$androidx_room_version"
+    implementation "androidx.room:room-ktx:$androidx_room_version"
+    kapt "androidx.room:room-compiler:$androidx_room_version"
+
+    implementation "androidx.paging:paging-runtime-ktx:$androidx_paging_version"
+
+    // Google libs
+    implementation platform("com.google.firebase:firebase-bom:$google_firebase_version")
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics'
+
+    implementation "com.google.android.gms:play-services-auth:$google_play_services_version"
+
+    implementation "com.google.android.material:material:$google_material_design_version"
+
+    implementation "com.google.code.gson:gson:$google_gson_version"
+
+    implementation "com.google.dagger:hilt-android:$google_hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$google_hilt_version"
+
+
+    // Square libs
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    // Bumptech libs
+    implementation "com.github.bumptech.glide:glide:$bumptech_glide_version"
+    kapt "com.github.bumptech.glide:compiler:$bumptech_glide_version"
+
+    // Other libs
+    implementation "com.jakewharton.timber:timber:$timber_version"
+    implementation "com.facebook.shimmer:shimmer:$facebook_shimmer_version"
+    implementation "com.github.CanHub:Android-Image-Cropper:$image_cropper_version"
+    implementation "de.hdodenhof:circleimageview:$circle_image_view_version"
+    implementation "com.kakao.sdk:v2-user:$kakao_user_sdk"
+
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_core_version"
+}

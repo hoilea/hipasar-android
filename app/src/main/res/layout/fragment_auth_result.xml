@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="viewModel"
+      type="com.uberando.hipasar.ui.auth.AuthViewModel" />
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ProgressBar
+      android:layout_width="@dimen/progress_bar_size"
+      android:layout_height="@dimen/progress_bar_size"
+      android:visibility="@{viewModel.showLoadingIndicator ? View.VISIBLE : View.GONE}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:gravity="center_horizontal"
+      android:orientation="vertical"
+      android:visibility="@{viewModel.showAuthResultContainer ? View.VISIBLE : View.GONE}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+      <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:contentDescription="@string/cd_checked"
+        app:setImage_authResult="@{viewModel.authResult}"
+        tools:src="@drawable/cancel" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textAppearance="@style/App.TextAppearance.Headline6.Bold"
+        app:setText_authResult="@{viewModel.authResult}"
+        tools:text="@string/str_payment_title_canceled" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="@{viewModel.authResultMessage}"
+        android:textAppearance="@style/App.TextAppearance.Subtitle1"
+        tools:text="@string/str_payment_description_canceled" />
+      <Button
+        style="@style/App.Widget.Button.Filled.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:onClick="@{() -> viewModel.onAuthRetryAction()}"
+        android:text="@string/str_retry" />
+      <Button
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onAuthCancelAction()}"
+        android:text="@string/str_cancel" />
+    </LinearLayout>
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:gravity="center_horizontal"
+      android:orientation="vertical"
+      android:visibility="@{viewModel.showSetPasswordFailedContainer ? View.VISIBLE : View.GONE}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:visibility="gone">
+      <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:contentDescription="@string/cd_checked"
+        android:src="@drawable/cancel"/>
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textAppearance="@style/App.TextAppearance.Headline6.Bold"
+        android:text="@string/str_auth_set_password_failed" />
+      <!--      <TextView-->
+      <!--        android:layout_width="wrap_content"-->
+      <!--        android:layout_height="wrap_content"-->
+      <!--        android:layout_marginStart="16dp"-->
+      <!--        android:layout_marginTop="8dp"-->
+      <!--        android:layout_marginEnd="16dp"-->
+      <!--        android:textAppearance="@style/App.TextAppearance.SemiSmall.Black"-->
+      <!--        android:text="@{viewModel.authResultMessage}"-->
+      <!--        tools:text="@string/str_payment_description_canceled" />-->
+      <Button
+        style="@style/App.Widget.Button.Filled.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:onClick="@{() -> viewModel.onSetPasswordRetryAction()}"
+        android:text="@string/str_retry" />
+      <Button
+        style="@style/App.Widget.Button.Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onAuthCancelAction()}"
+        android:text="@string/str_cancel" />
+    </LinearLayout>
+<!--    <LinearLayout-->
+<!--      android:layout_width="match_parent"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginStart="16dp"-->
+<!--      android:layout_marginEnd="16dp"-->
+<!--      android:gravity="center_horizontal"-->
+<!--      android:orientation="vertical"-->
+<!--      android:visibility="@{viewModel.showVerifyEmailFailedContainer ? View.VISIBLE : View.GONE}"-->
+<!--      app:layout_constraintBottom_toBottomOf="parent"-->
+<!--      app:layout_constraintEnd_toEndOf="parent"-->
+<!--      app:layout_constraintStart_toStartOf="parent"-->
+<!--      app:layout_constraintTop_toTopOf="parent">-->
+<!--      <ImageView-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:contentDescription="@string/cd_checked"-->
+<!--        android:src="@drawable/cancel"/>-->
+<!--      <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:textAppearance="@style/App.TextAppearance.Headline6.Bold"-->
+<!--        android:text="@string/str_msg_email_verification_failed" />-->
+<!--      &lt;!&ndash;      <TextView&ndash;&gt;-->
+<!--      &lt;!&ndash;        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--      &lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--      &lt;!&ndash;        android:layout_marginStart="16dp"&ndash;&gt;-->
+<!--      &lt;!&ndash;        android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--      &lt;!&ndash;        android:layout_marginEnd="16dp"&ndash;&gt;-->
+<!--      &lt;!&ndash;        android:textAppearance="@style/App.TextAppearance.SemiSmall.Black"&ndash;&gt;-->
+<!--      &lt;!&ndash;        android:text="@{viewModel.authResultMessage}"&ndash;&gt;-->
+<!--      &lt;!&ndash;        tools:text="@string/str_payment_description_canceled" />&ndash;&gt;-->
+<!--      <Button-->
+<!--        style="@style/App.Widget.Button.Filled.Colored"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:onClick="@{() -> viewModel.onVerifyEmailRetryAction()}"-->
+<!--        android:text="@string/str_retry" />-->
+<!--      <Button-->
+<!--        style="@style/App.Widget.Button.Text"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:onClick="@{() -> viewModel.onVerifyEmailCancelAction()}"-->
+<!--        android:text="@string/str_cancel" />-->
+<!--    </LinearLayout>-->
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

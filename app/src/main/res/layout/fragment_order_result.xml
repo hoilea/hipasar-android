@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="viewModel"
+      type="com.uberando.hipasar.ui.order.result.OrderResultViewModel" />
+  </data>
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ProgressBar
+      android:layout_width="@dimen/progress_bar_size"
+      android:layout_height="@dimen/progress_bar_size"
+      android:layout_gravity="center"
+      android:visibility="@{viewModel.showLoadingIndicator ? View.VISIBLE : View.GONE}" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="@{viewModel.showResultContainer ? View.VISIBLE : View.GONE}">
+      <ImageButton
+        android:id="@+id/payment_callback_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/cd_close_image"
+        android:onClick="@{() -> viewModel.onCloseButtonClick()}"
+        android:src="@drawable/ic_baseline_close_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+          android:layout_width="80dp"
+          android:layout_height="80dp"
+          android:contentDescription="@string/cd_checked"
+          app:setImage_paymentCallback="@{viewModel.paymentCallbackCode}"
+          tools:src="@drawable/cancel" />
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="32dp"
+          android:textAppearance="@style/App.TextAppearance.Headline6.Bold"
+          app:setText_paymentCallbackTitle="@{viewModel.paymentCallbackCode}"
+          tools:text="@string/str_payment_title_canceled" />
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="8dp"
+          android:layout_marginEnd="16dp"
+          android:textAlignment="center"
+          android:textAppearance="@style/App.TextAppearance.Subtitle1"
+          app:setText_paymentCallbackDescription="@{viewModel.paymentCallbackCode}"
+          tools:text="@string/str_payment_description_canceled" />
+      </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </FrameLayout>
+</layout>

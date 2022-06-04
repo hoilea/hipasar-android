@@ -1,0 +1,59 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        kotlinx_coroutines_version = '1.5.2'
+
+        androidx_appcompat_version = '1.4.1'
+        androidx_constraint_layout_version = '2.1.3'
+        androidx_core_ktx_version = '1.7.0'
+        androidx_lifecycle_version = '2.4.1'
+        androidx_navigation_version = '2.4.1'
+        androidx_paging_version = '3.1.0'
+        androidx_room_version = '2.4.2'
+
+        bumptech_glide_version = '4.12.0'
+
+        circle_image_view_version = '3.1.0'
+
+        facebook_shimmer_version = '0.5.0'
+
+        google_firebase_version = '29.0.1'
+        google_gson_version = '2.8.9'
+        google_hilt_version = '2.40.1'
+        google_material_design_version = '1.5.0'
+        google_play_services_version = '20.1.0'
+
+        image_cropper_version = '3.3.6'
+
+        kakao_user_sdk = "2.8.3"
+
+        okhttp_logging_version = '4.9.0'
+        retrofit_version = '2.9.0'
+
+        timber_version = '5.0.1'
+
+        junit_version = '4.13.2'
+        androidx_junit_version = '1.1.3'
+        androidx_espresso_core_version = '3.4.0'
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.gms:google-services:4.3.10'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$androidx_navigation_version"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$google_hilt_version"
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
+    }
+}
+
+plugins {
+    id 'com.android.application' version '7.1.0' apply false
+    id 'com.android.library' version '7.1.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

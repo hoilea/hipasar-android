@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <import type="android.view.View" />
+    <import type="com.uberando.hipasar.util.Constants" />
+    <variable
+      name="viewModel"
+      type="com.uberando.hipasar.ui.main.account.setting.change.email.AccountChangeEmailViewModel" />
+  </data>
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+      style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <androidx.appcompat.widget.Toolbar
+        style="@style/Widget.MaterialComponents.Toolbar.Surface"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:setOnClick_navigationIcon="@{() -> viewModel.onBackButtonClick()}"
+        app:title="@{viewModel.toolbarTitle}">
+      </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+      <ProgressBar
+        android:layout_width="@dimen/progress_bar_size"
+        android:layout_height="@dimen/progress_bar_size"
+        android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+      <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:paddingStart="16dp"
+          android:paddingEnd="16dp">
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="8dp" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.guideMessage}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            tools:text="@string/str_guide_set_name" />
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="8dp" />
+          <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/str_email"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:setErrorRule_source="@{viewModel.email}"
+            app:setErrorRule_target="@{Constants.INPUT_TARGET_EMAIL}">
+            <com.google.android.material.textfield.TextInputEditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:imeOptions="actionDone"
+              android:inputType="textEmailAddress"
+              android:text="@={viewModel.email}" />
+          </com.google.android.material.textfield.TextInputLayout>
+          <Space
+            android:layout_width="wrap_content"
+            android:layout_height="8dp" />
+          <Button
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.buttonEnabled}"
+            android:onClick="@{() -> viewModel.onActionButtonClick()}"
+            android:text="@{viewModel.buttonText}" />
+        </LinearLayout>
+      </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

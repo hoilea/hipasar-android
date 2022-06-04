@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- Text size -->
+  <dimen name="text_size_medium">18sp</dimen>
+
+  <!-- Widget size -->
+  <dimen name="edit_text_corner_radius">8dp</dimen>
+
+  <dimen name="image_button_size">32dp</dimen>
+
+  <dimen name="progress_bar_size">40dp</dimen>
+  <dimen name="small_progress_bar">24dp</dimen>
+
+  <dimen name="chip_spacing_size">8dp</dimen>
+  <dimen name="item_product_image_size">80dp</dimen>
+  <dimen name="item_cart_product_image_size">104dp</dimen>
+  <dimen name="item_product_grid_image_height">72dp</dimen>
+  <dimen name="order_item_view_space">16dp</dimen>
+  <dimen name="profile_menu_item_space">16dp</dimen>
+  <dimen name="profile_image_size">80dp</dimen>
+
+  <dimen name="standard_edge_space">16dp</dimen>
+  <dimen name="content_container_space">24dp</dimen>
+  <dimen name="product_detail_app_bar_height">278dp</dimen>
+
+  <dimen name="tab_padding_start">6dp</dimen>
+  <dimen name="tab_padding_end">6dp</dimen>
+  <dimen name="tab_indicator_size">4dp</dimen>
+  <dimen name="normal_size">16dp</dimen>
+  <dimen name="card_corner_radius">4dp</dimen>
+  <dimen name="product_detail_view_height">2dp</dimen>
+  <dimen name="view_marker_size">4dp</dimen>
+  <dimen name="radio_button_space">8dp</dimen>
+  <dimen name="button_height_sm">32dp</dimen>
+  <dimen name="menu_item_badge_size">16dp</dimen>
+  <dimen name="button_amount_change_container_size">38dp</dimen>
+  <dimen name="item_order_separator_margin">8dp</dimen>
+  <dimen name="home_cart_card_container_corner_radius">24dp</dimen>
+  <dimen name="product_grid_item_count">2</dimen>
+  <dimen name="phone_verification_box_width">40dp</dimen>
+  <dimen name="phone_verification_key_width">48dp</dimen>
+  <dimen name="phone_verification_box_view_height">2dp</dimen>
+</resources>
